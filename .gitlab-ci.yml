@@ -3,9 +3,19 @@ variables:
  OUTPUT_: $CI_PROJECT_DIR\build\SearchTrie\release
  TEST_: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe
  
+
 stages:
+ - pre_script
  - build
  - test
+
+NuGet Restore:
+ stage: pre_script
+ script:
+    - set NUGET="C:\Program Files (x86)\NuGet\nuget.exe"
+    - echo %NUGET%
+    - '%NUGET% restore -NonInteractive'
+
 
 SearchTrie:
  stage: build
