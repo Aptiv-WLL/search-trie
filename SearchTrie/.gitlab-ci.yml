@@ -1,0 +1,11 @@
+image: joemac96/mono-proxy:latest
+
+stages:
+ - build
+
+Build Search Trie:
+ stage: build
+ script:
+    - nuget restore -NonInteractive
+    - msbuild /p:Configuration="Release" /p:Playform="Any CPU" /p:OutputPath="./../../build/release" "SearchTrie.csproj"
+    

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <!--*-->
+    <id>$id$</id>
+    <!--*-->
+    <version>1.0.0.2</version>
+    <title>
+    </title>
+    <!--*-->
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <!--
+    <licenseUrl></licenseUrl>
+    <projectUrl></projectUrl>
+    <iconUrl></iconUrl>
+-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!--*-->
+    <description>$description$</description>
+    <!--*-->
+    <releaseNotes>Added&amp;#x0020;Pattern&amp;#x0020;Matching&amp;#x0020;functionality&amp;#x0020;to&amp;#x0020;allow&amp;#x0020;generic&amp;#x0020;series&amp;#x0020;to&amp;#x0020;be&amp;#x0020;placed&amp;#x0020;anywhere.</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>
+    </tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+</package>
