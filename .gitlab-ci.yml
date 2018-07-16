@@ -1,6 +1,6 @@
 variables:
  BUILD_: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe
- OUTPUT_: $CI_PROJECT_DIR\build\global-library\release
+ OUTPUT_: $CI_PROJECT_DIR\build\SearchTrie\release
  TEST_: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe
  
 stages:
@@ -14,91 +14,7 @@ NuGet Restore:
     - set NUGET="C:\Program Files (x86)\NuGet\nuget.exe"
     - echo %NUGET%
     - '%NUGET% restore -NonInteractive'
-    #- DIR AlgosTesting/AlgosTesting.sln
-    - DIR Conversions\Conversions.csproj
-    
-AlgosTesting:
- stage: build
- script:
-    - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "AlgosTesting\AlgosTesting.sln"'
-    
-Conversion:
- stage: build
- script:  
-    - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "Conversions\Conversions.csproj"'
 
-CircularBuffer:
-  stage: build
-  script:
-    - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "CircularBuffer/CircularBuffer.csproj"'
-    - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "CircularBufferTests/CircularBufferTests.csproj"'
-  artifacts:
-    paths:
-      - '%OUTPUT_%'
-    expire_in: 10 minutes
-
-Documentatin:
- stage: build
- script:
-  - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "Documentation\Documentation.csproj"' 
-
-ExcelFiles:
- stage: build
- script:
-    - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "ExcelFileLibrary\ExcelLibrary\ExcelLibrary.csproj"'
-    
-GlobalLibrary:
- stage: build
- script:
-    - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "GlobalLibrary\GlobalLibrary.csproj"'
-    - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "GlobalLibraryUnitTests\GlobalLibraryUnitTests.csproj"'
- artifacts:
-   paths:
-     - '%OUTPUT_%'
-   expire_in: 10 minutes
-
-Graphing:
- stage: build
- script:
-    - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "Graphing\Graphing.csproj"'
-    
-LoggingDisplay:
-  stage: build
-  script:
-    - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "LoggingDisplay\LoggingDisplay.csproj"'
-
-
-Logging:
-  stage: build
-  script:
-    - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "Logging\Logging.csproj"'
-    - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "LoggingTestCases\LoggingTestCases.csproj"'
-  artifacts:
-    paths:
-      - '%OUTPUT_%'
-    expire_in: 10 minutes
-
-
-#ParallelMergeSort:
- #stage: build
- #script:
-    #- '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "ParallelMergeSort\ParallelMergeSortNoGUI.sln"'
-    
-PriorityQueue:
- stage: build
- script:
-    - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "PriorityQueue\PriorityQueue\PriorityQueue.csproj"'
-    
-Random:
- stage: build
- script:
-    - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "RandomLibraries\RandomLibraries.csproj"'
-
-Ratio:
- stage: build
- script:
-    - '"%BUILD_%" /p:Configuration="Release" /p:Platform="Any CPU" /p:OutputPath=%OUTPUT_% "Ratio\Ratio.csproj"'
-    
 SearchTrie:
  stage: build
  script:
@@ -113,24 +29,3 @@ SearchTrieTests:
  stage: test
  script:
     - '"%TEST_%" %OUTPUT_%\SearchTrieUnitTests.dll'
-
-LoggingTests:
-  stage: test
-  script:
-    - '"%TEST_%" %OUTPUT_%\LoggingTestCases.dll'
-  dependencies:
-    - Logging
-
-CircularBufferTests:
-  stage: test
-  script:
-    - '"%TEST_%" %OUTPUT_%\CircularBufferTests.dll'
-  dependencies:
-    - CircularBuffer
-
-GlobalLibraryTests:
-  stage: test
-  script:
-    - '"%TEST_%" %OUTPUT_%\GlobalLibraryUnitTests.dll'
-  dependencies:
-    - GlobalLibrary
